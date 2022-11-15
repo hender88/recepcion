@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Creacion de la vista para mostrar los visitantes -->
+
+        <record id="vista_formulario_visitante" model="ir.ui.view">
+            <field name="name">visitante.form</field>
+            <field name="model">recepcion.visitantes</field>
+            <field name="arch" type="xml">
+                <form string="Formulario Visitante">
+                      <sheet>
+ <group>  
+<group string="Documento de Identidad">     
+
+ <table width="300" border="0">
+  <tr>
+  <td width="54"><strong><field name="nacionalidad" size="10"/></strong></td>
+    <td width="182"> <h1><field name="id_cedula"/> </h1></td>
+   
+       <td width="143"><strong></strong></td>
+   
+  </tr>
+
+</table>
+
+</group>			
+
+                            <group>
+                            <field name="name"/>
+                            <field name="apellidos"/>
+                            <field name="nota"/>
+                            </group>
+
+</group> 
+
+				<notebook>
+                          
+ <page string="N° de Visitas a Departamentos">
+                                <field name="visitas_id">
+                                   <tree string="Visitas" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="department_id"/>
+                                    <field name="hora_salida"/>
+
+                                </tree>
+                            </field>
+                                
+						</page>
+ </notebook>
+
+                                
+                         
+                    </sheet>
+                </form>
+                       
+               
+            </field>
+        </record>
+
+
+    <record id="view_recepcion_filter" model="ir.ui.view">
+            <field name="name">recepcion.visitantes.search</field>
+            <field name="model">recepcion.visitantes</field>
+            <field name="arch" type="xml">
+                <search string="Visitas">
+                        <field name="id_cedula"/>
+                       <field name="name"/>
+                            <field name="apellidos"/>
+                   
+                </search>
+            </field>
+        </record>
+
+        <record id="vista_arbol_visitantes" model="ir.ui.view">
+            <field name="name">visitantes.tree</field>
+            <field name="model">recepcion.visitantes</field>
+            <field name="arch" type="xml">
+                <tree string="Listado Visitantes">
+                      
+                    <field name="name"/>
+                    <field name="apellidos"/>
+                    <field name="id_cedula"/>
+					<field
+                                       name="visitas_id"
+                                        
+                                    />
+                    <field name="nota"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Creacion de la vista para mostrar las visitas -->
+
+
+
+<record id="view_graph_visitas" model="ir.ui.view">
+    <field name="name">view_graph_visitas</field>
+    <field name="model">recepcion.visitas</field>
+    <field name="arch" type="xml">
+        <graph type="bar">
+   
+           <field name="department_id"  type="col" />
+           
+        </graph>
+    </field>
+</record>
+
+
+
+       
+
+        <!-- Accion de ventana para los visitantes -->
+
+        <record id="accion_listar_visitantes" model="ir.actions.act_window">
+            <field name="name">Visitantes</field>
+            <field name="res_model">recepcion.visitantes</field>
+            <field name="view_mode">tree,form,graph</field>
+           
+        </record>
+
+       <!-- Accion de ventana para las visitas -->
+
+       
+        <!-- top level menu: no parent -->
+        <menuitem id="menu_principal_recepcion" name="Recepción" groups="group_recepcion"/>
+        <!-- Submenu para Recepción -->
+        <menuitem id="menu_recepcion_recepcion" name="Recepción" parent="menu_principal_recepcion" groups="group_recepcion"/>
+        <!-- Entradas de menu para el modelo Recepción -->
+        <menuitem id="item_recepcion_visitantes" name="Visitantes" parent="menu_recepcion_recepcion" action="accion_listar_visitantes" groups="group_recepcion"/>
+     
+
+    </data>
+</odoo>

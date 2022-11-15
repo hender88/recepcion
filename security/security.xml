@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_recepcion" model="res.groups">
+            <field name="name">Recepcion</field>
+            <field name="comment">Registro de Personas en Recepcion</field>
+        </record>
+    </data>
+</odoo>
